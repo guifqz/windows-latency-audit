@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LatencyAudit - Relatório</title>
+<style>:root{--bg:#f4f6f9;--card:#fff;--text:#1b2430;--muted:#5d6b7e;--line:#e2e7ee;--ok:#1a8f4c;--warn:#c27c0e;--bad:#c93c3c;--info:#2f6fd6;--skip:#7b8794;--track:#e6ebf2}
+@media (prefers-color-scheme:dark){:root{--bg:#10151c;--card:#182029;--text:#e6ebf2;--muted:#9aa8b9;--line:#26313e;--ok:#3ec57a;--warn:#e5a63a;--bad:#ef6a6a;--info:#6ea2f5;--skip:#8795a5;--track:#26313e}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 "Segoe UI",system-ui,-apple-system,sans-serif}
+main{max-width:920px;margin:0 auto;padding:32px 20px 48px}
+header{display:flex;flex-wrap:wrap;gap:28px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px 28px}
+.gauge{position:relative;width:160px;height:160px;flex:none}
+.gauge svg{width:100%;height:100%;transform:rotate(-90deg)}
+.gauge .track{fill:none;stroke:var(--track);stroke-width:12}
+.gauge .bar{fill:none;stroke-width:12;stroke-linecap:round}
+.gauge .num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.gauge .num strong{font-size:40px;line-height:1}
+.gauge .num span{font-size:13px;color:var(--muted)}
+h1{margin:0 0 4px;font-size:24px}
+.meta{color:var(--muted);font-size:13px;margin:0 0 14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);border-radius:999px;padding:3px 12px;font-size:13px}
+.note{margin:16px 0 0;padding:10px 14px;border-radius:10px;background:color-mix(in srgb,var(--warn) 14%,transparent);border:1px solid var(--warn);font-size:14px}
+h2{margin:32px 0 12px;font-size:17px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--skip);border-radius:10px;padding:14px 18px;margin:0 0 10px}
+.card.pass{border-left-color:var(--ok)}.card.fail{border-left-color:var(--bad)}.card.info{border-left-color:var(--info)}.card.error{border-left-color:var(--warn)}
+.card h3{margin:0;font-size:15px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.badge{font-size:11px;font-weight:600;border-radius:6px;padding:1px 8px;color:#fff;background:var(--skip)}
+.badge.pass{background:var(--ok)}.badge.fail{background:var(--bad)}.badge.info{background:var(--info)}.badge.error{background:var(--warn)}
+.sev{font-size:12px;color:var(--muted);font-weight:400}
+.values{margin:6px 0 0;font-size:14px}
+.values b{font-weight:600}
+.why{margin:6px 0 0;color:var(--muted);font-size:14px}
+.detail{margin:6px 0 0;font-size:12.5px;color:var(--muted);font-family:Consolas,monospace}
+.warning{margin:8px 0 0;padding:8px 12px;border-radius:8px;background:color-mix(in srgb,var(--bad) 12%,transparent);font-size:13.5px}
+code{font-family:Consolas,monospace;font-size:13px;background:var(--track);border-radius:5px;padding:1px 6px}
+footer{margin-top:36px;color:var(--muted);font-size:12.5px;text-align:center}
+@media (max-width:560px){header{padding:18px}.gauge{margin:0 auto}}</style></head><body><main>
+<header>
+<div class="gauge" role="img" aria-label="Nota 63 de 100"><svg viewBox="0 0 160 160"><circle class="track" cx="80" cy="80" r="70"/><circle class="bar" cx="80" cy="80" r="70" stroke="var(--warn)" stroke-dasharray="439.82" stroke-dashoffset="162.73"/></svg><div class="num"><strong>63</strong><span>de 100</span></div></div>
+<div>
+<h1>Auditoria de latência: Regular</h1>
+<p class="meta">PC-GAMER-EXEMPLO &middot; Microsoft Windows 11 Pro (build 26100) &middot; 16/10/2026 10:30</p>
+<div class="chips"><span class="chip">10 conformes</span><span class="chip">4 para ajustar</span><span class="chip">4 informativas</span><span class="chip">1 ignoradas</span></div>
+<p class="note">Dados fictícios, apenas para demonstração do relatório.</p>
+</div></header>
+<h2>Energia</h2>
+<section class="card fail">
+<h3><span class="badge fail">Atenção</span>Plano de energia ativo<span class="sev">impacto alto</span></h3>
+<p class="values">Atual: <b>Equilibrado</b> &nbsp;&middot;&nbsp; Esperado: <b>Alto desempenho ou Desempenho máximo</b></p>
+<p class="why">Planos Equilibrado e Economia de energia reduzem a frequência da CPU sob carga leve e aumentam a variação de tempo de quadro (frametime). Alto desempenho ou Desempenho máximo mantêm a CPU responsiva. Em notebook na bateria o consumo sobe.</p>
+<p class="detail">GUID 381b4222-f694-41f0-9685-ff5bb260df2e</p>
+<p class="why">Correção: <code>Set-LatencyRecommendation -RuleId power-plan -WhatIf</code></p>
+</section>
+<section class="card pass">
+<h3><span class="badge pass">Conforme</span>Suspensão seletiva de USB (plano ativo, na tomada)<span class="sev">impacto médio</span></h3>
+<p class="values">Atual: <b>Desativada</b> &nbsp;&middot;&nbsp; Esperado: <b>Desativada</b></p>
+<p class="why">A suspensão seletiva coloca portas USB em repouso. Mouse, teclado e headset podem ter atraso ao acordar ou desconectar por instantes. Desativar na tomada elimina essa fonte de falha de entrada.</p>
+</section>
+<h2>Jogos</h2>
+<section class="card fail">
+<h3><span class="badge fail">Atenção</span>Captura em segundo plano (Xbox Game DVR / Game Bar)<span class="sev">impacto médio</span></h3>
+<p class="values">Atual: <b>Ativa</b> &nbsp;&middot;&nbsp; Esperado: <b>Desativada</b></p>
+<p class="why">A gravação em segundo plano mantém o codificador de vídeo da GPU ativo e consome CPU, memória e disco enquanto você joga, o que pode gerar quedas de FPS e microtravadas. Quem não usa a captura do Windows ganha estabilidade desativando.</p>
+<p class="detail">GameDVR_Enabled=1; AppCaptureEnabled=1</p>
+<p class="why">Correção: <code>Set-LatencyRecommendation -RuleId game-dvr -WhatIf</code></p>
+</section>
+<section class="card info">
+<h3><span class="badge info">Informativo</span>Otimizações de tela cheia (flag global)<span class="sev">sem pontuação</span></h3>
+<p class="values">Atual: <b>Padrão do Windows</b></p>
+<p class="why">Em jogos modernos (DirectX 11/12 com flip model) a otimização de tela cheia é neutra ou melhora a latência. Desativar ajuda principalmente em jogos antigos e depende do título. Por isso só informamos: teste jogo a jogo em vez de mudar globalmente.</p>
+</section>
+<section class="card pass">
+<h3><span class="badge pass">Conforme</span>Modo de Jogo do Windows<span class="sev">impacto baixo</span></h3>
+<p class="values">Atual: <b>Ligado</b> &nbsp;&middot;&nbsp; Esperado: <b>Ligado</b></p>
+<p class="why">O Modo de Jogo evita que o Windows Update instale drivers e notifique durante o jogo e prioriza recursos para o processo em primeiro plano. O ganho costuma ser pequeno; o ponto é não deixar desligado sem motivo.</p>
+</section>
+<h2>Gráficos</h2>
+<section class="card pass">
+<h3><span class="badge pass">Conforme</span>Taxa de atualização do monitor<span class="sev">impacto alto</span></h3>
+<p class="values">Atual: <b>165 Hz (máximo 165 Hz)</b> &nbsp;&middot;&nbsp; Esperado: <b>Na taxa máxima informada pelo driver</b></p>
+<p class="why">É comum o monitor de 144 Hz ou mais ficar em 60 Hz após trocar de cabo, driver ou GPU. Isso reduz a fluidez e aumenta a latência de exibição. A taxa máxima é a informada pelo driver de vídeo e pode diferir do que o monitor suporta.</p>
+</section>
+<section class="card pass">
+<h3><span class="badge pass">Conforme</span>Idade do driver de vídeo<span class="sev">impacto médio</span></h3>
+<p class="values">Atual: <b>45 dias</b> &nbsp;&middot;&nbsp; Esperado: <b>até 180 dias</b></p>
+<p class="why">Drivers de GPU recebem correções de desempenho e estabilidade para jogos novos quase todo mês. Um driver com mais de seis meses tende a perder otimizações e correções de travamento. Baixe sempre do site do fabricante.</p>
+<p class="detail">GPU de exemplo, versão 32.0.15.8142, de 01/09/2026</p>
+</section>
+<section class="card pass">
+<h3><span class="badge pass">Conforme</span>Agendamento de GPU acelerado por hardware (HAGS)<span class="sev">impacto baixo</span></h3>
+<p class="values">Atual: <b>Ligado</b> &nbsp;&middot;&nbsp; Esperado: <b>Ligado</b></p>
+<p class="why">Move o agendamento de memória de vídeo da CPU para a GPU. Pode reduzir latência com Frame Generation (DLSS 3/FSR 3) e aliviar a CPU, mas em alguns drivers e jogos o resultado é neutro ou pior. Ative e compare o desempenho antes de manter.</p>
+</section>
+<h2>Segurança</h2>
+<section class="card info">
+<h3><span class="badge info">Informativo</span>Isolamento de núcleo / Integridade de memória (VBS e HVCI)<span class="sev">sem pontuação</span></h3>
+<p class="values">Atual: <b>VBS ativo, Integridade de memória (HVCI) ativa</b> &nbsp;&middot;&nbsp; Esperado: <b>Integridade de memória desligada</b></p>
+<p class="why">VBS e HVCI usam o hipervisor para proteger o kernel contra drivers maliciosos. O custo em jogos varia de zero a alguns por cento de FPS, mais perceptível em CPUs antigas. Esta é uma troca entre segurança e desempenho e a decisão é sua: a ferramenta só mostra o estado.</p>
+<p class="warning">Desativar a Integridade de memória (HVCI) remove uma proteção contra drivers maliciosos e exploits no kernel. Só faça isso em máquina dedicada a jogos, com drivers de fontes confiáveis.</p>
+</section>
+<h2>Entrada</h2>
+<section class="card fail">
+<h3><span class="badge fail">Atenção</span>Aceleração do mouse (Aprimorar precisão do ponteiro)<span class="sev">impacto médio</span></h3>
+<p class="values">Atual: <b>Ativada</b> &nbsp;&middot;&nbsp; Esperado: <b>Desativada</b></p>
+<p class="why">Com a aceleração ligada, a distância percorrida pelo cursor depende da velocidade do movimento, o que atrapalha a memória muscular em jogos de mira. Desligada, o movimento é proporcional. A mudança vale após encerrar a sessão do Windows.</p>
+<p class="detail">MouseSpeed=1</p>
+<p class="why">Correção: <code>Set-LatencyRecommendation -RuleId mouse-acceleration -WhatIf</code></p>
+</section>
+<h2>Rede</h2>
+<section class="card info">
+<h3><span class="badge info">Informativo</span>Algoritmo de Nagle (TcpAckFrequency / TCPNoDelay)<span class="sev">sem pontuação</span></h3>
+<p class="values">Atual: <b>Informativo, não avaliado</b></p>
+<p class="why">O ajuste de Nagle afeta conexões TCP. A maioria dos jogos competitivos usa UDP, então a mudança não traz ganho comprovado e entra na lista de dicas sem efeito. Não avaliamos nem alteramos; use ping e jitter medidos como referência.</p>
+</section>
+<section class="card pass">
+<h3><span class="badge pass">Conforme</span>Economia de energia nos adaptadores de rede<span class="sev">impacto médio</span></h3>
+<p class="values">Atual: <b>nenhum</b> &nbsp;&middot;&nbsp; Esperado: <b>Nenhum adaptador com economia de energia</b></p>
+<p class="why">Quando o Windows pode desligar o adaptador para economizar energia, a placa pode acordar com atraso e causar picos de ping e quedas de conexão. Em desktop não há motivo para manter ligado.</p>
+</section>
+<h2>Sistema</h2>
+<section class="card info">
+<h3><span class="badge info">Informativo</span>Efeitos visuais do Windows<span class="sev">sem pontuação</span></h3>
+<p class="values">Atual: <b>Personalizado</b></p>
+<p class="why">Animações e transparências usam a GPU do desktop, não a do jogo em tela cheia. O impacto em FPS é pequeno e só importa em GPU integrada ou PC fraco. Mostramos o estado sem recomendar mudança.</p>
+</section>
+<section class="card skipped">
+<h3><span class="badge skipped">Ignorada</span>Apps em segundo plano (chave global)<span class="sev">impacto baixo</span></h3>
+<p class="why">Apps da Microsoft Store permitidos em segundo plano consomem CPU, rede e bateria. No Windows 11 o controle é por app e a chave global pode não existir; nesse caso a regra é ignorada.</p>
+<p class="detail">Chave global ausente (controle por app no Windows 11).</p>
+</section>
+<section class="card pass">
+<h3><span class="badge pass">Conforme</span>Espaço livre no disco do sistema<span class="sev">impacto médio</span></h3>
+<p class="values">Atual: <b>42.3 % livre</b> &nbsp;&middot;&nbsp; Esperado: <b>pelo menos 15% livre</b></p>
+<p class="why">Disco quase cheio atrasa atualizações, cache de shaders, arquivo de paginação e a escrita em SSD (menos área para o controlador trabalhar). Manter pelo menos 15% livre evita perda de desempenho e falhas de instalação.</p>
+<p class="detail">211,5 GB livres de 500,0 GB em C:</p>
+</section>
+<section class="card pass">
+<h3><span class="badge pass">Conforme</span>Reinicialização pendente do Windows Update<span class="sev">impacto baixo</span></h3>
+<p class="values">Atual: <b>Não</b> &nbsp;&middot;&nbsp; Esperado: <b>Não</b></p>
+<p class="why">Com atualização aguardando reinício, o Windows pode usar CPU e disco em segundo plano e drivers novos ainda não valem. Reinicie antes de medir ou jogar.</p>
+</section>
+<section class="card pass">
+<h3><span class="badge pass">Conforme</span>Programas na inicialização<span class="sev">impacto baixo</span></h3>
+<p class="values">Atual: <b>7 itens</b> &nbsp;&middot;&nbsp; Esperado: <b>até 10 itens</b></p>
+<p class="why">Cada programa na inicialização disputa CPU, disco e rede logo após o boot e muitos continuam em segundo plano durante o jogo. A ferramenta não remove nada, porque só você sabe o que usa.</p>
+<p class="detail">Exemplos: Discord, Steam, OneDrive, Spotify, Teams</p>
+</section>
+<section class="card pass">
+<h3><span class="badge pass">Conforme</span>Arquivo de paginação (pagefile)<span class="sev">impacto médio</span></h3>
+<p class="values">Atual: <b>Automático</b> &nbsp;&middot;&nbsp; Esperado: <b>Gerenciado pelo sistema ou manual</b></p>
+<p class="why">Sem arquivo de paginação, jogos e launchers podem fechar com erro de memória insuficiente mesmo com muita RAM livre, porque reservam mais memória virtual do que usam. O recomendado é deixar o Windows gerenciar.</p>
+</section>
+<h2>Hardware</h2>
+<section class="card fail">
+<h3><span class="badge fail">Atenção</span>Velocidade da memória RAM versus nominal<span class="sev">impacto alto</span></h3>
+<p class="values">Atual: <b>67 % da velocidade nominal</b> &nbsp;&middot;&nbsp; Esperado: <b>pelo menos 95% da velocidade nominal</b></p>
+<p class="why">Pentes vendidos como DDR4-3200 ou DDR5-6000 costumam rodar em velocidade bem menor até ativar XMP ou EXPO na BIOS. Memória lenta derruba os FPS mínimos em jogos limitados pela CPU, sobretudo em Ryzen. A correção é feita na BIOS e esta ferramenta não a altera.</p>
+<p class="detail">Configurada: 2133 MT/s; nominal do módulo: 3200 MT/s</p>
+</section>
+<footer>Gerado por LatencyAudit 0.1.0 &middot; somente leitura: nenhuma configuração foi alterada.</footer>
+</main></body></html>

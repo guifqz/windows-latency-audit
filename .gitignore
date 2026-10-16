@@ -1,0 +1,14 @@
+# Relatórios gerados localmente (o exemplo versionado fica em docs/)
+LatencyAudit-*.html
+testResults.xml
+coverage.xml
+
+# Backups de teste e temporários
+*.log
+*.tmp
+
+# Editor / SO
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini

@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    name: ${{ matrix.shell == 'pwsh' && 'PowerShell 7' || 'Windows PowerShell 5.1' }}
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shell: [pwsh, powershell]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar Pester e PSScriptAnalyzer
+        shell: ${{ matrix.shell }}
+        run: |
+          Install-Module Pester -MinimumVersion 5.0 -Scope CurrentUser -Force -SkipPublisherCheck
+          Install-Module PSScriptAnalyzer -Scope CurrentUser -Force
+
+      - name: PSScriptAnalyzer
+        shell: ${{ matrix.shell }}
+        run: |
+          $findings = Invoke-ScriptAnalyzer -Path . -Recurse -Severity Warning, Error
+          $findings | Format-Table RuleName, Severity, ScriptName, Line, Message -AutoSize
+          if ($findings) { throw "PSScriptAnalyzer encontrou $(@($findings).Count) problema(s)." }
+
+      - name: Pester
+        shell: ${{ matrix.shell }}
+        run: |
+          Import-Module Pester -MinimumVersion 5.0
+          Invoke-Pester -Path ./Tests -CI -Output Detailed
