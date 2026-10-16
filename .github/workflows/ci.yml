@@ -7,30 +7,35 @@ on:
 
 jobs:
   test:
-    name: ${{ matrix.shell == 'pwsh' && 'PowerShell 7' || 'Windows PowerShell 5.1' }}
+    name: ${{ matrix.shell }}
     runs-on: windows-latest
     strategy:
       fail-fast: false
       matrix:
-        shell: [pwsh, powershell]
+        shell: [powershell, pwsh]
+    defaults:
+      run:
+        shell: ${{ matrix.shell }}
     steps:
       - uses: actions/checkout@v4
 
-      - name: Instalar Pester e PSScriptAnalyzer
-        shell: ${{ matrix.shell }}
+      - name: Instalar Pester 5 e PSScriptAnalyzer
         run: |
-          Install-Module Pester -MinimumVersion 5.0 -Scope CurrentUser -Force -SkipPublisherCheck
+          Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+          Install-Module Pester -RequiredVersion 5.7.1 -Scope CurrentUser -Force -SkipPublisherCheck
           Install-Module PSScriptAnalyzer -Scope CurrentUser -Force
 
       - name: PSScriptAnalyzer
-        shell: ${{ matrix.shell }}
         run: |
           $findings = Invoke-ScriptAnalyzer -Path . -Recurse -Severity Warning, Error
-          $findings | Format-Table RuleName, Severity, ScriptName, Line, Message -AutoSize
+          $findings | Format-Table RuleName, Severity, ScriptName, Line, Message -AutoSize -Wrap
           if ($findings) { throw "PSScriptAnalyzer encontrou $(@($findings).Count) problema(s)." }
 
       - name: Pester
-        shell: ${{ matrix.shell }}
         run: |
-          Import-Module Pester -MinimumVersion 5.0
-          Invoke-Pester -Path ./Tests -CI -Output Detailed
+          Import-Module Pester -RequiredVersion 5.7.1
+          $cfg = New-PesterConfiguration
+          $cfg.Run.Path = './Tests'
+          $cfg.Run.Exit = $true
+          $cfg.Output.Verbosity = 'Detailed'
+          Invoke-Pester -Configuration $cfg
